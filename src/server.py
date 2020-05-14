@@ -6,9 +6,9 @@ import services.csv_service as CSVService
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello_world():
-    states_json = CSVService.get_covid_states_csv()
+@app.route('/<state>')
+def get_covid_data_by_state(state):
+    states_json = CSVService.get_covid_states_csv(state=state)
     response = Response(response=json.dumps(states_json),
                         status=200,
                         mimetype='application/json')

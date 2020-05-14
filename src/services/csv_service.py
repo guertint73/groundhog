@@ -10,7 +10,7 @@ def get_covid_states_csv(state='Minnesota'):
     '''
     state_df = pd.read_csv(f'src/resources/{Constants.STATES_FILENAME}')
 
-    state_dict = state_df.to_dict("records")
+    state_dict = state_df[(state_df.state == state)].to_dict("records")    
     return state_dict
 
 
