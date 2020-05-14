@@ -1,13 +1,17 @@
 # import requests
 # import json
-# import csv
+import util.constants as Constants
+import pandas as pd
 
 
-def get_covid_states_csv():
+def get_covid_states_csv(state='Minnesota'):
     '''
     Get COVID-19 cases by state
     '''
-    pass
+    state_df = pd.read_csv(f'src/resources/{Constants.STATES_FILENAME}')
+
+    state_dict = state_df.to_dict("records")
+    return state_dict
 
 
 def get_covid_counties_csv():
