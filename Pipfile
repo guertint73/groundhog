@@ -1,0 +1,12 @@
+[[source]]
+url = 'https://pypi.python.org/simple'
+verify_ssl = false
+name = 'pypi'
+
+[packages]
+flask = "*"
+jsonify = "*"
+requests = "*"
+
+[requires]
+python_version = '3.7'
