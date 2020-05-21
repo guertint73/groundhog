@@ -15,7 +15,7 @@ def get_covid_states_csv(state=None):
 
     state_dict = state_df[(state_df.state == state)].to_dict("records")
 
-    if state_dict == []:
+    if len(state_dict) == 0:
         return Error.NOT_FOUND
 
     return state_dict
