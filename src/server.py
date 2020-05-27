@@ -6,8 +6,14 @@ from util.errors import Error
 '''Flask Setup'''
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def hello_world():
+    response = Response(response=json.dumps({'message': 'hello world!'}),
+                        status=200,
+                        mimetype='application/json')
+    return response
 
-@app.route('/groundhog/v1/state/<state>')
+@app.route('/groundhog/v1/state/<state>', methods=['GET'])
 def get_covid_data_by_state(state):
     states_json = CSVService.get_covid_states_csv(state=state)
 
