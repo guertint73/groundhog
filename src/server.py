@@ -2,9 +2,11 @@ from flask import Flask, Response
 import json
 import services.csv_service as CSVService
 from util.errors import Error
+from flask_cors import CORS
 
 '''Flask Setup'''
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/', methods=['GET'])
 def hello_world():
