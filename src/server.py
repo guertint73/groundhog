@@ -45,9 +45,20 @@ def get_county_map():
 @app.route('/groundhog/v1/county/<state>/<county>', methods=['GET'])
 def get_covid_data_by_county(state, county):
     county_data = CSVService.get_covid_by_county_csv(state, county)
-    response = Response(response=json.dumps(county_data),
-                        status=200,
-                        mimetype='application/json')
+
+    if county_data is Error.NOT_FOUND:
+        err_msg = {
+            'error': 'State/County combination not found',
+            'state': state,
+            'county': county
+        }
+        response = Response(response=json.dumps(err_msg),
+                            status=404,
+                            mimetype='application/json')
+    else:
+        response = Response(response=json.dumps(county_data),
+                            status=200,
+                            mimetype='application/json')
     return response
 
 
