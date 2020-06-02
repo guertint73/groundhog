@@ -17,7 +17,7 @@ def hello_world():
 
 @app.route('/groundhog/v1/state/<state>', methods=['GET'])
 def get_covid_data_by_state(state):
-    states_json = CSVService.get_covid_states_csv(state=state)
+    states_json = CSVService.get_covid_by_state_csv(state=state)
 
     if states_json is Error.NOT_FOUND:
         err_msg = {
@@ -32,6 +32,22 @@ def get_covid_data_by_state(state):
         response = Response(response=json.dumps(states_json),
                             status=200,
                             mimetype='application/json')
+    return response
+
+@app.route('/groundhog/v1/counties', methods=['GET'])
+def get_county_map():
+    county_json = CSVService.get_state_county_info()
+    response = Response(response=json.dumps(county_json),
+                        status=200,
+                        mimetype='application/json')
+    return response
+
+@app.route('/groundhog/v1/county/<state>/<county>', methods=['GET'])
+def get_covid_data_by_county(state, county):
+    county_data = CSVService.get_covid_by_county_csv(state, county)
+    response = Response(response=json.dumps(county_data),
+                        status=200,
+                        mimetype='application/json')
     return response
 
 
